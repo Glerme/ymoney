@@ -1,8 +1,14 @@
 {
+  "displayName": "YMoney",
   "expo": {
     "name": "YMoney",
     "slug": "YMoney",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.glerme.YMoney"
+    }
   }
 }
