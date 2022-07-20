@@ -3,12 +3,22 @@
   "expo": {
     "name": "YMoney",
     "slug": "YMoney",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1f252a"
+    },
+    "assetBundlePatterns": ["**/*"],
     "android": {
-      "package": "com.glerme.YMoney"
+      "package": "com.glerme.YMoney",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1f252a"
+      },
+      "backgroundColor": "#1f252a"
     }
   }
 }

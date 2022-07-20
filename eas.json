@@ -3,6 +3,12 @@
     "version": ">= 0.55.1"
   },
   "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      },
+      "distribution": "internal"
+    },
     "development": {
       "distribution": "internal",
       "android": {
@@ -11,9 +17,6 @@
       "ios": {
         "buildConfiguration": "Debug"
       }
-    },
-    "preview": {
-      "distribution": "internal"
     },
     "production": {}
   },
