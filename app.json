@@ -1,10 +1,8 @@
 {
   "expo": {
-    "name": "ymoney1",
-    "slug": "ymoney1",
+    "name": "YMoney",
+    "slug": "YMoney",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }
