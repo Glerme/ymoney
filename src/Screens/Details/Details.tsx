@@ -8,7 +8,7 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
-import { RootStackParamList } from "routes";
+import { RootStackParamList } from "../../routes";
 
 import { useGetDetails } from "../../hooks/useGetDetails";
 
@@ -47,7 +47,7 @@ export const Details: React.FC = () => {
         navigate.navigate("Home");
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       ToastAndroid.show("Ocorreu um erro para apagar a transação", 2000);
     }
