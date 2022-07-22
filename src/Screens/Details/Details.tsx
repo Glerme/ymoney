@@ -8,7 +8,7 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
-import { RootStackParamList } from "routes";
+import { RootStackParamList } from "../../routes";
 
 import { useGetDetails } from "../../hooks/useGetDetails";
 
