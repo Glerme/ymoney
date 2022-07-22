@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "rootDir": "src",
   },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "include": [
+    "./src/*",
+  ],
 }

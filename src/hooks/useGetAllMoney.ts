@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 import { useFocusEffect } from "@react-navigation/native";
 
-import { OutputsProps } from "types/Outputs.types";
+import { OutputsProps } from "../types/Outputs.types";
 
 import { getRealm } from "../databases/realm";
 
@@ -24,7 +24,7 @@ export const useGetAllMoney = () => {
 
       setData(listMoney);
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       setErrors(error as any);
     } finally {

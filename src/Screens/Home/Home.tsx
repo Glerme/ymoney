@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { RootStackParamList } from "routes";
+import { RootStackParamList } from "../../routes";
 
 import { useGetAllMoney } from "../../hooks/useGetAllMoney";
 

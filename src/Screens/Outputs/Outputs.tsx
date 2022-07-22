@@ -23,6 +23,7 @@ import { RadioGroup } from "../../components/Form/RadioGroup";
 import { InputCurrency } from "../../components/Form/InputCurrency";
 
 import * as Styled from "./styles";
+import { formatCurrencyToUs } from "../../functions/formatCurrencyToUs";
 
 type OutputsScreenProps = StackNavigationProp<RootStackParamList, "Outputs">;
 
@@ -50,8 +51,6 @@ export const Outputs: React.FC = () => {
       const errors = await validateErrors(outputSchema, fields);
 
       if (Object.keys(errors).length > 0) {
-        console.log("entrou");
-
         setErrors({
           ...errors,
           title: errors.title,
@@ -66,7 +65,7 @@ export const Outputs: React.FC = () => {
 
       const data = {
         _id: uuid.v4(),
-        value: fields.value.replace("R$", "").replace(",", "."),
+        value: formatCurrencyToUs(fields.value),
         title: fields.title,
         description: fields.description,
         type: fields.type,

@@ -47,7 +47,7 @@ export const Details: React.FC = () => {
         navigate.navigate("Home");
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       ToastAndroid.show("Ocorreu um erro para apagar a transação", 2000);
     }
