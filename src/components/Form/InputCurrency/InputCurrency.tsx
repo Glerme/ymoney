@@ -38,7 +38,13 @@ export const InputCurrency: React.FC<InputCurrencyProps> = ({
       marginRight={marginRight}
       marginTop={marginTop}
     >
-      <Input error={error} label="Valor" {...maskedInputProps} {...rest} />
+      <Input
+        error={error}
+        label="Valor"
+        keyboardType="numeric"
+        {...maskedInputProps}
+        {...rest}
+      />
     </Styled.InputContainer>
   );
 };

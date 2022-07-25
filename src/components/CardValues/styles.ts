@@ -33,8 +33,6 @@ export const TitleStyled = styled.Text`
   color: #010101;
 `;
 
-export const ContainerValue = styled.View``;
-
 export const Value = styled.Text<CardProps>`
   font-size: 20px;
 

@@ -32,11 +32,11 @@ export const CardValues: React.FC<CardProps> = ({ cardContent, onPress }) => {
           </Text>
         </View>
 
-        <Styled.ContainerValue>
+        <View>
           <Styled.Value backgroundColor={cardContent.type}>
             <CurrencyNumber numberValue={cardContent.value} />
           </Styled.Value>
-        </Styled.ContainerValue>
+        </View>
       </Styled.Content>
     </Styled.Card>
   );
