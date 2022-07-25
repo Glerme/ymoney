@@ -4,6 +4,7 @@ import { Text } from "../../components/Text";
 import { CurrencyNumber } from "../../components/CurrencyNumber";
 
 import * as Styled from "./styles";
+import { View } from "react-native";
 
 interface CardProps {
   cardContent: {
@@ -21,7 +22,7 @@ export const CardValues: React.FC<CardProps> = ({ cardContent, onPress }) => {
   return (
     <Styled.Card backgroundColor={cardContent.type} onPress={onPress}>
       <Styled.Content>
-        <Styled.Description>
+        <View>
           <Styled.TitleStyled numberOfLines={1} ellipsizeMode="tail">
             {cardContent.title}
           </Styled.TitleStyled>
@@ -29,7 +30,7 @@ export const CardValues: React.FC<CardProps> = ({ cardContent, onPress }) => {
           <Text numberOfLines={1} ellipsizeMode="tail">
             {cardContent.description}
           </Text>
-        </Styled.Description>
+        </View>
 
         <Styled.ContainerValue>
           <Styled.Value backgroundColor={cardContent.type}>

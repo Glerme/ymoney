@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 interface CardProps {
   backgroundColor: string;
@@ -8,8 +8,8 @@ export const Card = styled.TouchableOpacity<CardProps>`
   background: white;
 
   border-left-width: 8px;
-  border-left-color: ${props =>
-    props.backgroundColor === 'saida' ? 'red' : 'green'};
+  border-left-color: ${(props) =>
+    props.backgroundColor === "saida" ? "red" : "green"};
 
   border-radius: 4px;
 
@@ -33,12 +33,11 @@ export const TitleStyled = styled.Text`
   color: #010101;
 `;
 
-export const Description = styled.View``;
-
 export const ContainerValue = styled.View``;
 
 export const Value = styled.Text<CardProps>`
   font-size: 20px;
 
-  color: ${props => (props.backgroundColor === 'Despesas' ? 'red' : 'green')}; ;
+  color: ${(props) =>
+    props.backgroundColor === "Despesas" ? "red" : "green"}; ;
 `;
