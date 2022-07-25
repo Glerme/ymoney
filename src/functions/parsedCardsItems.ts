@@ -1,4 +1,4 @@
-import {OutputsProps} from 'types/Outputs.types';
+import { OutputsProps } from "../types/Outputs.types";
 
 interface useParsedCardItemsReturn {
   id: number;
@@ -7,32 +7,32 @@ interface useParsedCardItemsReturn {
 }
 
 export const parsedCardsItems = (
-  items: OutputsProps[],
+  items: OutputsProps[]
 ): useParsedCardItemsReturn[] => {
   const onlyEntradas = items
-    .filter(item => item.type === 'entrada')
+    .filter((item) => item.type === "entrada")
     .reduce((prev, curr) => Number(curr.value) + prev, 0);
 
   const onlySaidas = items
-    .filter(item => item.type === 'saida')
+    .filter((item) => item.type === "saida")
     .reduce((prev, curr) => Number(curr.value) + prev, 0);
 
-  const total = items.reduce((prev, curr) => Number(curr.value) + prev, 0);
+  const total = onlyEntradas - onlySaidas;
 
   const dashboardCards = [
     {
       id: 1,
-      title: 'Total',
+      title: "Total",
       value: total.toFixed(2),
     },
     {
       id: 2,
-      title: 'Entradas',
+      title: "Entradas",
       value: onlyEntradas.toFixed(2),
     },
     {
       id: 3,
-      title: 'Saídas',
+      title: "Saídas",
       value: onlySaidas.toFixed(2),
     },
   ];

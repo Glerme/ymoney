@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ToastAndroid } from "react-native";
 
 import uuid from "react-native-uuid";
+import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -10,7 +11,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { getRealm } from "../../databases/realm";
 
-import { RootStackParamList } from "routes";
+import { RootStackParamList } from "../../routes";
 
 import { outputSchema } from "./utils/schema";
 import { validateErrors } from "../../functions/validateErrors";
@@ -93,9 +94,10 @@ export const Outputs: React.FC = () => {
 
   return (
     <>
-      <Header title="Nova Transação" />
+      <StatusBar style="light" translucent backgroundColor="#191641" />
 
       <SafeAreaView style={{ flex: 1, backgroundColor: "#191641" }}>
+        <Header title="Nova Transação" />
         <Styled.OutputsContainerInputs>
           <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
             <Input

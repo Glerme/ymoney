@@ -1,9 +1,9 @@
 import React from "react";
 import { FlatList, View } from "react-native";
 
-import { ActivityIndicator } from "react-native-paper";
-
+import { StatusBar } from "expo-status-bar";
 import LottieView from "lottie-react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -45,6 +45,8 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <>
+      <StatusBar style="light" translucent backgroundColor="#191641" />
+
       <SafeAreaView style={{ flex: 1, backgroundColor: "#191641" }}>
         <Styled.Container>
           <Title color="#fff" fontSize="20px">

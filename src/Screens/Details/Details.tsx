@@ -20,6 +20,7 @@ import { Header } from "../../components/Header";
 import { CurrencyNumber } from "../../components/CurrencyNumber";
 
 import * as Styled from "./styles";
+import { StatusBar } from "expo-status-bar";
 
 type DetailsScreenProps = StackNavigationProp<RootStackParamList, "Detalhes">;
 
@@ -67,18 +68,20 @@ export const Details: React.FC = () => {
 
   return (
     <>
-      <Header
-        title="Detalhes"
-        action={
-          <BorderlessButton onPress={() => handleRemoveOutput(data!._id)}>
-            <View style={{ padding: 8 }}>
-              <Icon name="trash" size={16} color="#fff" />
-            </View>
-          </BorderlessButton>
-        }
-      />
+      <StatusBar style="light" translucent backgroundColor="#191641" />
 
       <SafeAreaView style={{ flex: 1 }}>
+        <Header
+          title="Detalhes"
+          action={
+            <BorderlessButton onPress={() => handleRemoveOutput(data!._id)}>
+              <View style={{ padding: 8 }}>
+                <Icon name="trash" size={16} color="#fff" />
+              </View>
+            </BorderlessButton>
+          }
+        />
+
         <Styled.Container>
           <Styled.TitleContainer>
             <Title fontSize="26px" color="#fff">
