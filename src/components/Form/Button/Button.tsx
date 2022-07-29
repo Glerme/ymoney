@@ -1,37 +1,36 @@
-import React, {ReactNode} from 'react';
-import {ButtonProps} from 'react-native';
-import {Button as RNPButton} from 'react-native-paper';
+import { Button as NativeBaseButton, Heading, IButtonProps } from "native-base";
 
-import * as Styled from './styles';
-interface Button extends Omit<ButtonProps, 'theme'> {
-  theme?: ReactNativePaper.Theme;
-  children: ReactNode;
-  onPress: () => void;
-  mode?: 'text' | 'outlined' | 'contained' | undefined;
+import * as Styled from "./styles";
+
+interface ButtonProps extends IButtonProps {
+  title: string;
   marginTop?: string;
   marginLeft?: string;
   marginRight?: string;
   marginBottom?: string;
 }
 
-export const Button: React.FC<Button> = ({
-  children,
-  mode = 'contained',
+export const Button: React.FC<ButtonProps> = ({
   marginBottom,
   marginLeft,
   marginRight,
   marginTop,
+  title,
   onPress,
+  ...rest
 }) => {
   return (
-    <Styled.ButtonContainer
-      marginBottom={marginBottom}
-      marginLeft={marginLeft}
-      marginRight={marginRight}
-      marginTop={marginTop}>
-      <RNPButton onPress={onPress} mode={mode}>
-        {children}
-      </RNPButton>
-    </Styled.ButtonContainer>
+    <NativeBaseButton
+      bg="green.700"
+      h={14}
+      fontSize="sm"
+      rounded="sm"
+      _pressed={{ bg: "green.500" }}
+      {...rest}
+    >
+      <Heading color="white" fontSize="sm">
+        {title}
+      </Heading>
+    </NativeBaseButton>
   );
 };
