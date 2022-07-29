@@ -1,14 +1,13 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
+import { Heading as RNBHeading } from "native-base";
 
-import {Title as RNPTitle} from 'react-native-paper';
-
-interface Title {
+interface TitleProps {
   colorTitle?: string;
   fontSize?: string;
 }
 
-export const TitleStyled = styled(RNPTitle)<Title>`
-  color: ${props => props.colorTitle || '#161616'};
-  font-size: ${props => `${props.fontSize}` || '16px'};
+export const TitleStyled = styled(RNBHeading)<TitleProps>`
+  color: ${(props) => props.colorTitle || "#161616"};
+  font-size: ${(props) => `${props.fontSize}` || "16px"};
   font-weight: 700;
 `;

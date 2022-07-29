@@ -1,14 +1,16 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { View } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
 import LottieView from "lottie-react-native";
+import { VStack, FlatList } from "native-base";
+
 import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { RootStackParamList } from "../../routes";
+import { RootStackParamList } from "../../routes/app.routes";
 
 import { useGetAllMoney } from "../../hooks/useGetAllMoney";
 
@@ -44,64 +46,56 @@ export const HomeScreen: React.FC = () => {
   }
 
   return (
-    <>
-      <StatusBar style="light" translucent backgroundColor="#191641" />
+    <SafeAreaView style={{ flex: 1 }}>
+      <VStack flex={1} pb={6} bg="gray.700">
+        <Title color="#fff" fontSize="20px">
+          Dashboard
+        </Title>
 
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#191641" }}>
-        <Styled.Container>
-          <Title color="#fff" fontSize="20px">
-            Dashboard
-          </Title>
-
-          <Styled.GridDashboardCards>
-            <FlatList
-              data={parsedCardItems}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <DashboardCard
-                  key={item.id}
-                  title={item.title}
-                  value={item.value || 0}
-                  iconName="credit-card"
-                />
-              )}
-            />
-          </Styled.GridDashboardCards>
-
-          <Title color="#fff" fontSize="16px">
-            Recentes
-          </Title>
-
-          {data.length > 0 ? (
-            <FlatList
-              data={data}
-              renderItem={({ item, index }) => (
-                <CardValues
-                  key={index}
-                  cardContent={item}
-                  onPress={() =>
-                    navigation.navigate("Detalhes", {
-                      outputId: item._id,
-                    })
-                  }
-                />
-              )}
-              keyExtractor={(item) => item._id}
-            />
-          ) : (
-            <Styled.EmptyContainer>
-              <LottieView
-                source={require("../../assets/empty.json")}
-                autoPlay
-                loop={true}
+        <Styled.GridDashboardCards>
+          <FlatList
+            data={parsedCardItems}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <DashboardCard
+                key={item.id}
+                title={item.title}
+                value={item.value || 0}
+                iconName="credit-card"
               />
-            </Styled.EmptyContainer>
-          )}
-        </Styled.Container>
+            )}
+          />
+        </Styled.GridDashboardCards>
+
+        {data.length > 0 ? (
+          <FlatList
+            data={data}
+            renderItem={({ item, index }) => (
+              <CardValues
+                key={index}
+                cardContent={item}
+                onPress={() =>
+                  navigation.navigate("Detalhes", {
+                    outputId: item._id,
+                  })
+                }
+              />
+            )}
+            keyExtractor={(item) => item._id}
+          />
+        ) : (
+          <Styled.EmptyContainer>
+            <LottieView
+              source={require("../../assets/empty.json")}
+              autoPlay
+              loop={true}
+            />
+          </Styled.EmptyContainer>
+        )}
 
         <ActionBottomButton onPress={() => navigation.navigate("Outputs")} />
-      </SafeAreaView>
-    </>
+      </VStack>
+    </SafeAreaView>
   );
 };

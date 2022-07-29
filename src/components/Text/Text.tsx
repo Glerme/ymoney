@@ -1,15 +1,15 @@
-import React, {ReactNode} from 'react';
-import {TextProps} from 'react-native';
+import React, { ReactNode } from "react";
+import { ITextProps } from "native-base";
 
-import * as Styled from './styles';
+import * as Styled from "./styles";
 
-interface TextProp extends TextProps {
+interface TextProps extends ITextProps {
   color?: string;
   fontSize?: string;
   children: ReactNode;
 }
 
-export const Text: React.FC<TextProp> = ({
+export const Text: React.FC<TextProps> = ({
   children,
   color,
   fontSize,

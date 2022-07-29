@@ -2,10 +2,6 @@ import "react-native-gesture-handler";
 
 import React from "react";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-// import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-
 import { NativeBaseProvider, StatusBar } from "native-base";
 import { Loading } from "./components/Loading";
 
@@ -35,17 +31,15 @@ const App = () => {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   return (
-    <SafeAreaProvider>
-      <NativeBaseProvider theme={THEME}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
-          translucent
-        />
+    <NativeBaseProvider theme={THEME}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
 
-        {fontsLoaded ? <Routes /> : <Loading />}
-      </NativeBaseProvider>
-    </SafeAreaProvider>
+      {fontsLoaded ? <Routes /> : <Loading />}
+    </NativeBaseProvider>
   );
 };
 

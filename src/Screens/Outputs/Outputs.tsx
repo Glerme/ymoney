@@ -11,20 +11,20 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { getRealm } from "../../databases/realm";
 
-import { RootStackParamList } from "../../routes";
+import { RootStackParamList } from "../../routes/app.routes";
 
 import { outputSchema } from "./utils/schema";
 import { validateErrors } from "../../functions/validateErrors";
+import { formatCurrencyToUs } from "../../functions/formatCurrencyToUs";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Form/Input";
 import { Button } from "../../components/Form/Button";
-import { Textarea } from "../../components/Form/Textarea";
 import { RadioGroup } from "../../components/Form/RadioGroup";
 import { InputCurrency } from "../../components/Form/InputCurrency";
 
 import * as Styled from "./styles";
-import { formatCurrencyToUs } from "../../functions/formatCurrencyToUs";
+import { FormControl } from "native-base";
 
 type OutputsScreenProps = StackNavigationProp<RootStackParamList, "Outputs">;
 
@@ -35,8 +35,8 @@ export const Outputs: React.FC = () => {
   const [errors, setErrors] = useState<{
     title: string;
     value: string;
-    description: string;
   } | null>(null);
+
   const [fields, setFields] = useState({
     title: "",
     value: "",
@@ -49,7 +49,12 @@ export const Outputs: React.FC = () => {
     setErrors(null);
 
     try {
-      const errors = await validateErrors(outputSchema, fields);
+      const errors = await validateErrors(outputSchema, {
+        title: fields.title,
+        value: fields.value,
+      });
+
+      console.log(errors);
 
       if (Object.keys(errors).length > 0) {
         setErrors({
@@ -59,19 +64,23 @@ export const Outputs: React.FC = () => {
           description: errors.description,
         });
 
-        throw new Error(errors);
+        return;
       }
+
+      console.log(errors);
 
       const realm = await getRealm();
 
       const data = {
         _id: uuid.v4(),
-        value: formatCurrencyToUs(fields.value),
+        value: fields.value,
         title: fields.title,
         description: fields.description,
         type: fields.type,
         createdAt: new Date(),
       };
+
+      console.log(data);
 
       realm.write(() => {
         realm.create("Output", data);
@@ -86,11 +95,9 @@ export const Outputs: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
 
-  if (loading) {
-    return <ActivityIndicator style={{ flex: 1 }} size="large" />;
-  }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -105,25 +112,32 @@ export const Outputs: React.FC = () => {
               value={fields.title}
               onChangeText={(text) => setFields({ ...fields, title: text })}
               keyboardType="default"
-              marginBottom="16px"
+              marginBottom="10px"
               error={errors?.title}
+              isInvalid={!!errors?.title}
+              isRequired
+              errorMessage={errors?.title}
             />
 
             <InputCurrency
               value={fields.value}
               onChangeText={(text) => setFields({ ...fields, value: text })}
-              marginBottom="16px"
-              error={errors?.value}
+              marginBottom="10px"
+              isInvalid={!!errors?.value}
+              isRequired
+              errorMessage={errors?.value}
             />
 
-            <Textarea
+            <Input
               placeholder={"Descrição"}
               value={fields.description}
               onChangeText={(text) =>
                 setFields({ ...fields, description: text })
               }
               marginBottom="16px"
-              error={errors?.description}
+              multiline
+              h={24}
+              textAlignVertical="top"
             />
 
             <RadioGroup
@@ -132,7 +146,12 @@ export const Outputs: React.FC = () => {
               marginTop="10px"
             />
 
-            <Button title="Salvar" onPress={handleSave} marginTop="20px">
+            <Button
+              title="Salvar"
+              onPress={handleSave}
+              marginTop="20px"
+              isLoading={loading}
+            >
               Salvar
             </Button>
           </KeyboardAwareScrollView>

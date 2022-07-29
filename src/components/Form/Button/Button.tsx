@@ -1,9 +1,8 @@
 import { Button as NativeBaseButton, Heading, IButtonProps } from "native-base";
 
-import * as Styled from "./styles";
-
 interface ButtonProps extends IButtonProps {
   title: string;
+  onPress: () => void;
   marginTop?: string;
   marginLeft?: string;
   marginRight?: string;
@@ -26,6 +25,11 @@ export const Button: React.FC<ButtonProps> = ({
       fontSize="sm"
       rounded="sm"
       _pressed={{ bg: "green.500" }}
+      marginBottom={marginBottom}
+      marginLeft={marginLeft}
+      marginRight={marginRight}
+      marginTop={marginTop}
+      onPress={onPress}
       {...rest}
     >
       <Heading color="white" fontSize="sm">
