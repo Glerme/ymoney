@@ -1,1 +1,1 @@
-export {CurrencyNumber} from './CurrencyNumber';
+export { CurrencyNumber } from "./CurrencyNumber";

@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+
 import { ITextProps } from "native-base";
 
 import * as Styled from "./styles";

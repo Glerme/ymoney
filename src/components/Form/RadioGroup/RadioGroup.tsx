@@ -1,7 +1,6 @@
-import { Radio } from "native-base";
 import React from "react";
 
-import { RadioButton as RNPRadioButton } from "react-native-paper";
+import { Radio } from "native-base";
 
 import * as Styled from "./styles";
 

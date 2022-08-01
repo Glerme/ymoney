@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { View } from "react-native";
 
 import { Pressable, Icon } from "native-base";
@@ -9,7 +9,7 @@ import * as Styled from "./styles";
 
 interface HeaderProps {
   title: string;
-  action?: ReactNode;
+  action?: React.ReactElement;
 }
 
 export const Header: React.FC<HeaderProps> = ({ title, action }) => {

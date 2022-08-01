@@ -16,18 +16,6 @@ import {
 import { Routes } from "./routes";
 
 const App = () => {
-  // const theme = {
-  //   ...DefaultTheme,
-  //   roundness: 6,
-  //   version: 3,
-  //   colors: {
-  //     ...DefaultTheme.colors,
-  //     primary: "#191641",
-  //     secondary: "#1f252a",
-  //     tertiary: "#f7f7f7",
-  //   },
-  // };
-
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   return (

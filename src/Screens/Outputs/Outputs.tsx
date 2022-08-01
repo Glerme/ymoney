@@ -96,6 +96,7 @@ export const Outputs: React.FC = () => {
 
       <SafeAreaView style={{ flex: 1, backgroundColor: "#191641" }}>
         <Header title="Nova Transação" />
+
         <Styled.OutputsContainerInputs>
           <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
             <Input

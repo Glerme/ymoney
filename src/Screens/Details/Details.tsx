@@ -1,14 +1,14 @@
 import React from "react";
 import { ToastAndroid, View } from "react-native";
 
-import { ActivityIndicator } from "react-native-paper";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import { StatusBar } from "expo-status-bar";
+import { FontAwesome } from "@expo/vector-icons";
+import { Pressable, Icon } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { BorderlessButton } from "react-native-gesture-handler";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
-import { RootStackParamList } from "../../routes";
+import { RootStackParamList } from "../../routes/app.routes";
 
 import { useGetDetails } from "../../hooks/useGetDetails";
 
@@ -17,10 +17,10 @@ import { getRealm } from "../../databases/realm";
 import { Text } from "../../components/Text";
 import { Title } from "../../components/Title";
 import { Header } from "../../components/Header";
+import { Loading } from "../../components/Loading";
 import { CurrencyNumber } from "../../components/CurrencyNumber";
 
 import * as Styled from "./styles";
-import { StatusBar } from "expo-status-bar";
 
 type DetailsScreenProps = StackNavigationProp<RootStackParamList, "Detalhes">;
 
@@ -55,7 +55,7 @@ export const Details: React.FC = () => {
   };
 
   if (loading) {
-    return <ActivityIndicator style={{ flex: 1 }} size="large" />;
+    return <Loading />;
   }
 
   if (error) {
@@ -74,11 +74,9 @@ export const Details: React.FC = () => {
         <Header
           title="Detalhes"
           action={
-            <BorderlessButton onPress={() => handleRemoveOutput(data!._id)}>
-              <View style={{ padding: 8 }}>
-                <Icon name="trash" size={16} color="#fff" />
-              </View>
-            </BorderlessButton>
+            <Pressable onPress={() => handleRemoveOutput(data!._id)}>
+              <Icon as={FontAwesome} name="trash-o" size={18} color="#fff" />
+            </Pressable>
           }
         />
 

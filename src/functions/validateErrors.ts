@@ -10,7 +10,5 @@ export const validateErrors = async (
     err.inner.forEach((e: any) => (validationErrors[e.path] = e.message));
   });
 
-  console.log("DENTRO DO VALIDATION ERROR", validationErrors);
-
   return validationErrors;
 };
