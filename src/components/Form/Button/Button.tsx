@@ -1,12 +1,13 @@
-import { Button as NativeBaseButton, Heading, IButtonProps } from "native-base";
+import { ReactNode } from "react";
+import { Button as NativeBaseButton, IButtonProps } from "native-base";
 
 interface ButtonProps extends IButtonProps {
-  title: string;
-  onPress: () => void;
+  onPress?: () => void;
   marginTop?: string;
   marginLeft?: string;
   marginRight?: string;
   marginBottom?: string;
+  children?: ReactNode;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -14,8 +15,8 @@ export const Button: React.FC<ButtonProps> = ({
   marginLeft,
   marginRight,
   marginTop,
-  title,
   onPress,
+  children,
   ...rest
 }) => {
   return (
@@ -32,9 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       {...rest}
     >
-      <Heading color="white" fontSize="sm">
-        {title}
-      </Heading>
+      {children}
     </NativeBaseButton>
   );
 };

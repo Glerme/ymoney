@@ -138,12 +138,7 @@ export const Outputs: React.FC = () => {
               marginTop="10px"
             />
 
-            <Button
-              title="Salvar"
-              onPress={handleSubmit}
-              marginTop="20px"
-              isLoading={loading}
-            >
+            <Button onPress={handleSubmit} marginTop="20px" isLoading={loading}>
               Salvar
             </Button>
           </KeyboardAwareScrollView>

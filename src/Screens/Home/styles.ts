@@ -6,13 +6,6 @@ export const Container = styled.View`
   padding: 16px;
 `;
 
-export const GridDashboardCards = styled.View`
-  justify-content: center;
-  align-items: center;
-
-  padding: 16px;
-`;
-
 export const GridCards = styled(ScrollView)`
   margin-bottom: 16px;
 `;

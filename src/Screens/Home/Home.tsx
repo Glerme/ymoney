@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
 import LottieView from "lottie-react-native";
-import { VStack, FlatList } from "native-base";
+import { VStack, FlatList, HStack } from "native-base";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -16,20 +16,23 @@ import { useGetAllMoney } from "../../hooks/useGetAllMoney";
 import { parsedCardsItems } from "../../functions/parsedCardsItems";
 
 import { Text } from "../../components/Text";
-import { Title } from "../../components/Title";
+import { Filter } from "../../components/Filter";
+import { Loading } from "../../components/Loading";
 import { CardValues } from "../../components/CardValues";
 import { DashboardCard } from "../../components/DashboardCard";
 import { ActionBottomButton } from "../../components/ActionBottomButton";
 
 import * as Styled from "./styles";
-import { Loading } from "../../components/Loading";
 
 type HomeScreenProps = StackNavigationProp<RootStackParamList, "Home">;
 
 export const HomeScreen: React.FC = () => {
-  const { data, error, loading } = useGetAllMoney();
+  const [statusSelected, setStatusSelected] = useState<"entrada" | "saida">(
+    "entrada"
+  );
+  const { data, error, loading, allData } = useGetAllMoney(statusSelected);
 
-  const parsedCardItems = parsedCardsItems(data);
+  const parsedCardItems = parsedCardsItems(allData);
 
   const navigation = useNavigation<HomeScreenProps>();
 
@@ -51,7 +54,7 @@ export const HomeScreen: React.FC = () => {
 
       <SafeAreaView style={{ flex: 1 }}>
         <VStack flex={1} bg="#191641" padding={"2"}>
-          <Styled.GridDashboardCards>
+          <HStack space={3} mt={8}>
             <FlatList
               data={parsedCardItems}
               horizontal
@@ -65,11 +68,23 @@ export const HomeScreen: React.FC = () => {
                 />
               )}
             />
-          </Styled.GridDashboardCards>
+          </HStack>
 
-          <Title color="#fff" fontSize="20px" mb="1.5">
-            Recentes
-          </Title>
+          <HStack space={3} mt={8} mb={6}>
+            <Filter
+              title="Entradas"
+              type="entrada"
+              onPress={() => setStatusSelected("entrada")}
+              isActive={statusSelected === "entrada"}
+            />
+
+            <Filter
+              title="Saídas"
+              type="saida"
+              onPress={() => setStatusSelected("saida")}
+              isActive={statusSelected === "saida"}
+            />
+          </HStack>
 
           {data.length > 0 ? (
             <FlatList
