@@ -3,7 +3,6 @@ import { ToastAndroid } from "react-native";
 
 import uuid from "react-native-uuid";
 import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -135,6 +134,7 @@ export const Outputs: React.FC = () => {
             <RadioGroup
               checked={fields.type}
               setChecked={(state) => setFields({ ...fields, type: state })}
+              marginBottom="10px"
               marginTop="10px"
             />
 

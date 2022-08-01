@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
@@ -30,11 +30,19 @@ export const HomeScreen: React.FC = () => {
   const [statusSelected, setStatusSelected] = useState<"entrada" | "saida">(
     "entrada"
   );
-  const { data, error, loading, allData } = useGetAllMoney(statusSelected);
+  const { data, error, loading } = useGetAllMoney();
 
-  const parsedCardItems = parsedCardsItems(allData);
+  const { items, totalValues } = parsedCardsItems(data);
 
   const navigation = useNavigation<HomeScreenProps>();
+
+  const handleSetEntrada = useCallback(() => {
+    setStatusSelected("entrada");
+  }, []);
+
+  const handleSetSaida = useCallback(() => {
+    setStatusSelected("saida");
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -56,7 +64,7 @@ export const HomeScreen: React.FC = () => {
         <VStack flex={1} bg="#191641" padding={"2"}>
           <HStack space={3} mt={8}>
             <FlatList
-              data={parsedCardItems}
+              data={totalValues}
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
@@ -74,34 +82,62 @@ export const HomeScreen: React.FC = () => {
             <Filter
               title="Entradas"
               type="entrada"
-              onPress={() => setStatusSelected("entrada")}
+              onPress={handleSetEntrada}
               isActive={statusSelected === "entrada"}
             />
 
             <Filter
               title="Saídas"
               type="saida"
-              onPress={() => setStatusSelected("saida")}
+              onPress={handleSetSaida}
               isActive={statusSelected === "saida"}
             />
           </HStack>
 
           {data.length > 0 ? (
-            <FlatList
-              data={data}
-              renderItem={({ item, index }) => (
-                <CardValues
-                  key={index}
-                  cardContent={item}
-                  onPress={() =>
-                    navigation.navigate("Detalhes", {
-                      outputId: item._id,
-                    })
-                  }
+            items.onlyEntradas.length > 0 &&
+            items.onlyEntradas[0].type === statusSelected ? (
+              <FlatList
+                data={items.onlyEntradas}
+                renderItem={({ item, index }) => (
+                  <CardValues
+                    key={index}
+                    cardContent={item}
+                    onPress={() =>
+                      navigation.navigate("Detalhes", {
+                        outputId: item._id,
+                      })
+                    }
+                  />
+                )}
+                keyExtractor={(item) => item._id}
+              />
+            ) : items.onlySaidas.length > 0 &&
+              items.onlySaidas[0].type === statusSelected ? (
+              <FlatList
+                data={items.onlySaidas}
+                renderItem={({ item, index }) => (
+                  <CardValues
+                    key={index}
+                    cardContent={item}
+                    onPress={() =>
+                      navigation.navigate("Detalhes", {
+                        outputId: item._id,
+                      })
+                    }
+                  />
+                )}
+                keyExtractor={(item) => item._id}
+              />
+            ) : (
+              <Styled.EmptyContainer>
+                <LottieView
+                  source={require("../../assets/empty.json")}
+                  autoPlay
+                  loop={true}
                 />
-              )}
-              keyExtractor={(item) => item._id}
-            />
+              </Styled.EmptyContainer>
+            )
           ) : (
             <Styled.EmptyContainer>
               <LottieView
