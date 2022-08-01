@@ -54,6 +54,8 @@ export const Input: React.FC<InputProps> = ({
           borderColor: "green.500",
           bg: "gray.700",
         }}
+        onChangeText={onChangeText}
+        value={value}
         {...rest}
       />
 

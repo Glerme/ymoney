@@ -24,7 +24,6 @@ import { RadioGroup } from "../../components/Form/RadioGroup";
 import { InputCurrency } from "../../components/Form/InputCurrency";
 
 import * as Styled from "./styles";
-import { FormControl } from "native-base";
 
 type OutputsScreenProps = StackNavigationProp<RootStackParamList, "Outputs">;
 
@@ -44,7 +43,7 @@ export const Outputs: React.FC = () => {
     type: "entrada",
   });
 
-  const handleSave = async () => {
+  const handleSubmit = async () => {
     setLoading(true);
     setErrors(null);
 
@@ -53,8 +52,6 @@ export const Outputs: React.FC = () => {
         title: fields.title,
         value: fields.value,
       });
-
-      console.log(errors);
 
       if (Object.keys(errors).length > 0) {
         setErrors({
@@ -67,20 +64,16 @@ export const Outputs: React.FC = () => {
         return;
       }
 
-      console.log(errors);
-
       const realm = await getRealm();
 
       const data = {
         _id: uuid.v4(),
-        value: fields.value,
+        value: formatCurrencyToUs(fields.value),
         title: fields.title,
         description: fields.description,
         type: fields.type,
         createdAt: new Date(),
       };
-
-      console.log(data);
 
       realm.write(() => {
         realm.create("Output", data);
@@ -95,8 +88,6 @@ export const Outputs: React.FC = () => {
     } finally {
       setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -148,7 +139,7 @@ export const Outputs: React.FC = () => {
 
             <Button
               title="Salvar"
-              onPress={handleSave}
+              onPress={handleSubmit}
               marginTop="20px"
               isLoading={loading}
             >
