@@ -48,7 +48,6 @@ export const InputCurrency: React.FC<InputCurrencyProps> = ({
           unit: "R$",
           suffixUnit: "",
         }}
-        ref={(ref) => ref}
         keyboardType="numeric"
         onChangeText={onChangeText}
         value={value}

@@ -1,10 +1,9 @@
-import React from "react";
-import { View } from "react-native";
+import React, { memo } from "react";
 
-import { useTheme } from "native-base";
+import { HStack, Spacer, useTheme } from "native-base";
 
-import { Text } from "../../components/Text";
-import { CurrencyNumber } from "../../components/CurrencyNumber";
+import { Text } from "../Text";
+import { CurrencyNumber } from "../CurrencyNumber";
 
 import * as Styled from "./styles";
 
@@ -26,30 +25,32 @@ export const CardValues: React.FC<CardProps> = ({ cardContent, onPress }) => {
   return (
     <Styled.Card backgroundColor={cardContent.type} onPress={onPress}>
       <Styled.Content>
-        <Styled.LeftContent>
-          <Styled.TitleStyled numberOfLines={1} ellipsizeMode="tail">
-            {cardContent.title}
-          </Styled.TitleStyled>
-          <Text
-            textTransform="capitalize"
-            color={
-              cardContent.type === "entrada"
-                ? colors.green[700]
-                : colors.secondary[700]
-            }
-          >
-            {cardContent.type}
-          </Text>
-          <Text numberOfLines={1} ellipsizeMode="tail">
-            {cardContent.description}
-          </Text>
-        </Styled.LeftContent>
+        <HStack alignItems="center">
+          <Styled.LeftContent>
+            <Styled.TitleStyled numberOfLines={1} ellipsizeMode="tail">
+              {cardContent.title}
+            </Styled.TitleStyled>
+            <Text
+              textTransform="capitalize"
+              color={
+                cardContent.type === "entrada"
+                  ? colors.green[700]
+                  : colors.secondary[700]
+              }
+            >
+              {cardContent.type}
+            </Text>
+            <Text numberOfLines={1} ellipsizeMode="tail">
+              {cardContent.description}
+            </Text>
+          </Styled.LeftContent>
 
-        <View>
+          <Spacer />
+
           <Styled.Value backgroundColor={cardContent.type}>
             <CurrencyNumber numberValue={cardContent.value} />
           </Styled.Value>
-        </View>
+        </HStack>
       </Styled.Content>
     </Styled.Card>
   );

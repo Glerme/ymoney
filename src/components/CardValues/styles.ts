@@ -1,11 +1,11 @@
 import styled from "styled-components/native";
-import { useTheme } from "native-base";
+import { Pressable, Box } from "native-base";
 
 interface CardProps {
   backgroundColor: string;
 }
 
-export const Card = styled.TouchableOpacity<CardProps>`
+export const Card = styled(Pressable)<CardProps>`
   background: white;
 
   border-left-width: 8px;
@@ -14,13 +14,11 @@ export const Card = styled.TouchableOpacity<CardProps>`
 
   border-radius: 4px;
 
-  max-height: 100px;
-
   padding: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 `;
 
-export const Content = styled.View`
+export const Content = styled(Box)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
