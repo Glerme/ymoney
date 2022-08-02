@@ -22,16 +22,19 @@ export const parsedCardsItems = (items: OutputsProps[]) => {
       id: 1,
       title: "Total",
       value: total.toFixed(2),
+      icon: "creditcard",
     },
     {
       id: 2,
       title: "Entradas",
       value: entradaValues.toFixed(2),
+      icon: "swapright",
     },
     {
       id: 3,
       title: "Saídas",
       value: saidasValues.toFixed(2),
+      icon: "swapleft",
     },
   ];
 

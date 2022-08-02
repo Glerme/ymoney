@@ -1,5 +1,7 @@
 import React from "react";
 
+import { AntDesign } from "@expo/vector-icons";
+
 import { CurrencyNumber } from "../../components/CurrencyNumber";
 
 import * as Styled from "./styles";
@@ -20,7 +22,12 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
   return (
     <Styled.Card onPress={onPress}>
       <Styled.CardRow>
-        <Styled.IconStyled name={iconName} size={20} color="#fff" />
+        <Styled.IconStyled
+          as={AntDesign}
+          name={iconName}
+          size={20}
+          color="#fff"
+        />
         <Styled.TitleStyled>{title}</Styled.TitleStyled>
       </Styled.CardRow>
 

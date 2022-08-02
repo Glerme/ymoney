@@ -34,8 +34,8 @@ export const CardValues: React.FC<CardProps> = ({ cardContent, onPress }) => {
             textTransform="capitalize"
             color={
               cardContent.type === "entrada"
-                ? colors.green[500]
-                : colors.red[500]
+                ? colors.green[700]
+                : colors.secondary[700]
             }
           >
             {cardContent.type}

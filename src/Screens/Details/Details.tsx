@@ -82,11 +82,11 @@ export const Details: React.FC = () => {
 
         <Styled.Container>
           <Styled.TitleContainer>
-            <Title fontSize="26px" color="#fff">
+            <Title fontSize="26px" color="#fff" textAlign="center">
               {data?.title}
             </Title>
             <CurrencyNumber
-              fontSize="48px"
+              fontSize="36px"
               color="#fff"
               numberValue={data?.value || 0}
             />
@@ -98,7 +98,7 @@ export const Details: React.FC = () => {
               fontSize="16px"
               color={data?.type === "entrada" ? "green" : "red"}
             >
-              {data?.type.toUpperCase()}
+              {data?.type?.toUpperCase()}
             </Text>
 
             <Text fontSize="16px">{data?.description}</Text>

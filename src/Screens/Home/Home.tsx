@@ -72,7 +72,7 @@ export const HomeScreen: React.FC = () => {
                   key={item.id}
                   title={item.title}
                   value={item.value || 0}
-                  iconName="credit-card"
+                  iconName={item.icon}
                 />
               )}
             />

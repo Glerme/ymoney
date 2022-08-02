@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Icon } from "native-base";
 
 export const Card = styled.TouchableOpacity`
   background-color: #fff;

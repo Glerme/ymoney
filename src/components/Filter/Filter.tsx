@@ -20,15 +20,14 @@ export const Filter: React.FC<Filter> = ({
 }) => {
   const { colors } = useTheme();
 
-  const colorType =
-    type === "entrada" ? colors.green[300] : colors.secondary[700];
+  const colorType = type === "entrada" ? colors.green[500] : colors.red[500];
 
   return (
     <Button
       variant="outline"
       borderWidth={isActive ? 1 : 0}
       borderColor={colorType}
-      bgColor="dark.100"
+      bgColor="warmGray.900"
       flex={1}
       size="sm"
       onPress={onPress}
