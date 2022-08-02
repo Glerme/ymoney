@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import * as Styled from './styles';
+import { Fab, Icon } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
 
 interface ActionBottomButtonProps {
   onPress: () => void;
@@ -10,15 +11,12 @@ export const ActionBottomButton: React.FC<ActionBottomButtonProps> = ({
   onPress,
 }) => {
   return (
-    <Styled.ActionBottomButtonStyled
-      icon={'plus'}
-      label={'Label'}
-      extended={false}
+    <Fab
+      renderInPortal={false}
+      shadow={2}
+      size="sm"
+      icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />}
       onPress={onPress}
-      visible={true}
-      animateFrom={'right'}
-      iconMode={'static'}
-      color={'#00565b'}
     />
   );
 };

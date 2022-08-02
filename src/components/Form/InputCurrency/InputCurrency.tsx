@@ -1,9 +1,9 @@
 import React from "react";
-import { Masks, useMaskedInputProps } from "react-native-mask-input";
+
+import { FormControl } from "native-base";
+import { TextInputMask } from "react-native-masked-text";
 
 import { Input } from "../Input";
-
-import * as Styled from "./styles";
 
 interface InputCurrencyProps {
   value: string;
@@ -12,7 +12,9 @@ interface InputCurrencyProps {
   marginLeft?: string;
   marginRight?: string;
   marginBottom?: string;
-  error?: any;
+  isRequired?: boolean;
+  isInvalid?: boolean;
+  errorMessage?: string;
 }
 
 export const InputCurrency: React.FC<InputCurrencyProps> = ({
@@ -22,29 +24,43 @@ export const InputCurrency: React.FC<InputCurrencyProps> = ({
   marginLeft,
   marginRight,
   marginTop,
-  error,
+  isRequired,
+  isInvalid,
+  errorMessage,
   ...rest
 }) => {
-  const maskedInputProps = useMaskedInputProps({
-    value,
-    onChangeText,
-    mask: Masks.BRL_CURRENCY,
-  });
-
   return (
-    <Styled.InputContainer
+    <FormControl
+      isRequired={isRequired}
+      isInvalid={isInvalid}
       marginBottom={marginBottom}
       marginLeft={marginLeft}
       marginRight={marginRight}
       marginTop={marginTop}
     >
-      <Input
-        error={error}
-        label="Valor"
+      <TextInputMask
+        type="money"
+        options={{
+          maskType: "BRL",
+          precision: 2,
+          separator: ",",
+          delimiter: ".",
+          unit: "R$",
+          suffixUnit: "",
+        }}
+        ref={(ref) => ref}
         keyboardType="numeric"
-        {...maskedInputProps}
-        {...rest}
+        onChangeText={onChangeText}
+        value={value}
+        placeholder="R$"
+        customTextInput={Input}
       />
-    </Styled.InputContainer>
+
+      {isInvalid && (
+        <FormControl.ErrorMessage mt="1">
+          {errorMessage}
+        </FormControl.ErrorMessage>
+      )}
+    </FormControl>
   );
 };

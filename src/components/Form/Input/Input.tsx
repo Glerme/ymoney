@@ -1,56 +1,69 @@
-import React from 'react';
+import React from "react";
 
-import {KeyboardTypeOptions} from 'react-native';
+import {
+  Input as NativeBaseInput,
+  IInputProps,
+  FormControl,
+} from "native-base";
 
-import {TextInput} from 'react-native-paper';
-import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
-
-import * as Styled from './styles';
-
-interface InputProps extends Omit<TextInputProps, 'theme'> {
-  theme?: ReactNativePaper.Theme;
-  value: string;
+interface InputProps extends IInputProps {
   onChangeText: (value: string) => void;
-  keyboardType?: KeyboardTypeOptions;
-  placeholder?: string;
-  label?: string;
+  value: string;
   marginTop?: string;
   marginLeft?: string;
   marginRight?: string;
   marginBottom?: string;
   error?: any;
+  isRequired?: boolean;
+  isInvalid?: boolean;
+  errorMessage?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
   onChangeText,
   value,
-  placeholder,
-  label,
-  keyboardType,
-  marginTop,
+  marginBottom,
   marginLeft,
   marginRight,
-  marginBottom,
-  error,
-  theme,
+  marginTop,
+  isRequired,
+  isInvalid,
+  errorMessage,
   ...rest
 }) => {
   return (
-    <Styled.InputContainer
+    <FormControl
+      isRequired={isRequired}
+      isInvalid={isInvalid}
       marginBottom={marginBottom}
       marginLeft={marginLeft}
       marginRight={marginRight}
-      marginTop={marginTop}>
-      <TextInput
-        value={value}
+      marginTop={marginTop}
+    >
+      <NativeBaseInput
+        bg="gray.100"
+        h={14}
+        size="md"
+        borderWidth={0}
+        fontSize="md"
+        fontFamily="body"
+        color="gray.800"
+        placeholderTextColor="gray.300"
+        _focus={{
+          borderWidth: 1,
+          borderColor: "primary.700",
+          bg: "gray.100",
+        }}
         onChangeText={onChangeText}
-        label={label}
-        placeholder={placeholder}
-        keyboardType={keyboardType}
-        error={error}
-        theme={theme}
+        value={value}
         {...rest}
       />
-    </Styled.InputContainer>
+
+      {isInvalid && (
+        <FormControl.ErrorMessage mt="1">
+          {errorMessage}
+        </FormControl.ErrorMessage>
+      )}
+    </FormControl>
   );
 };

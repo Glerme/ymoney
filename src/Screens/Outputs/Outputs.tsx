@@ -3,7 +3,6 @@ import { ToastAndroid } from "react-native";
 
 import uuid from "react-native-uuid";
 import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,20 +10,19 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { getRealm } from "../../databases/realm";
 
-import { RootStackParamList } from "../../routes";
+import { RootStackParamList } from "../../routes/app.routes";
 
 import { outputSchema } from "./utils/schema";
 import { validateErrors } from "../../functions/validateErrors";
+import { formatCurrencyToUs } from "../../functions/formatCurrencyToUs";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Form/Input";
 import { Button } from "../../components/Form/Button";
-import { Textarea } from "../../components/Form/Textarea";
 import { RadioGroup } from "../../components/Form/RadioGroup";
 import { InputCurrency } from "../../components/Form/InputCurrency";
 
 import * as Styled from "./styles";
-import { formatCurrencyToUs } from "../../functions/formatCurrencyToUs";
 
 type OutputsScreenProps = StackNavigationProp<RootStackParamList, "Outputs">;
 
@@ -35,21 +33,24 @@ export const Outputs: React.FC = () => {
   const [errors, setErrors] = useState<{
     title: string;
     value: string;
-    description: string;
   } | null>(null);
+
   const [fields, setFields] = useState({
     title: "",
     value: "",
     description: "",
-    type: "entrada",
   });
+  const [type, setType] = useState("entrada");
 
-  const handleSave = async () => {
+  const handleSubmit = async () => {
     setLoading(true);
     setErrors(null);
 
     try {
-      const errors = await validateErrors(outputSchema, fields);
+      const errors = await validateErrors(outputSchema, {
+        title: fields.title,
+        value: fields.value,
+      });
 
       if (Object.keys(errors).length > 0) {
         setErrors({
@@ -59,7 +60,7 @@ export const Outputs: React.FC = () => {
           description: errors.description,
         });
 
-        throw new Error(errors);
+        return;
       }
 
       const realm = await getRealm();
@@ -69,7 +70,7 @@ export const Outputs: React.FC = () => {
         value: formatCurrencyToUs(fields.value),
         title: fields.title,
         description: fields.description,
-        type: fields.type,
+        type,
         createdAt: new Date(),
       };
 
@@ -88,16 +89,13 @@ export const Outputs: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return <ActivityIndicator style={{ flex: 1 }} size="large" />;
-  }
-
   return (
     <>
       <StatusBar style="light" translucent backgroundColor="#191641" />
 
       <SafeAreaView style={{ flex: 1, backgroundColor: "#191641" }}>
         <Header title="Nova Transação" />
+
         <Styled.OutputsContainerInputs>
           <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
             <Input
@@ -105,34 +103,42 @@ export const Outputs: React.FC = () => {
               value={fields.title}
               onChangeText={(text) => setFields({ ...fields, title: text })}
               keyboardType="default"
-              marginBottom="16px"
+              marginBottom="10px"
               error={errors?.title}
+              isInvalid={!!errors?.title}
+              isRequired
+              errorMessage={errors?.title}
             />
 
             <InputCurrency
               value={fields.value}
               onChangeText={(text) => setFields({ ...fields, value: text })}
-              marginBottom="16px"
-              error={errors?.value}
+              marginBottom="10px"
+              isInvalid={!!errors?.value}
+              isRequired
+              errorMessage={errors?.value}
             />
 
-            <Textarea
-              placeholder={"Descrição"}
+            <Input
               value={fields.description}
               onChangeText={(text) =>
                 setFields({ ...fields, description: text })
               }
               marginBottom="16px"
-              error={errors?.description}
+              multiline
+              h={24}
+              textAlignVertical="top"
+              placeholder="Descrição"
             />
 
             <RadioGroup
-              checked={fields.type}
-              setChecked={(state) => setFields({ ...fields, type: state })}
+              checked={type}
+              setChecked={setType}
+              marginBottom="10px"
               marginTop="10px"
             />
 
-            <Button title="Salvar" onPress={handleSave} marginTop="20px">
+            <Button onPress={handleSubmit} marginTop="20px" isLoading={loading}>
               Salvar
             </Button>
           </KeyboardAwareScrollView>

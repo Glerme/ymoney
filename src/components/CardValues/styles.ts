@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { useTheme } from "native-base";
 
 interface CardProps {
   backgroundColor: string;
@@ -23,6 +24,10 @@ export const Content = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const LeftContent = styled.View`
+  max-width: 200px;
 `;
 
 export const TitleStyled = styled.Text`

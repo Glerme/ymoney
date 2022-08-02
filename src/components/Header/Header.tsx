@@ -1,15 +1,15 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { View } from "react-native";
 
+import { Pressable, Icon } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { BorderlessButton } from "react-native-gesture-handler";
 
 import * as Styled from "./styles";
 
 interface HeaderProps {
   title: string;
-  action?: ReactNode;
+  action?: React.ReactElement;
 }
 
 export const Header: React.FC<HeaderProps> = ({ title, action }) => {
@@ -22,11 +22,11 @@ export const Header: React.FC<HeaderProps> = ({ title, action }) => {
   return (
     <>
       <Styled.Container>
-        <BorderlessButton onPress={handleGoBack}>
+        <Pressable onPress={handleGoBack}>
           <View style={{ padding: 8 }}>
-            <Icon name="arrow-left" size={18} color="#fff" />
+            <Icon as={AntDesign} name="arrowleft" size={18} color="#fff" />
           </View>
-        </BorderlessButton>
+        </Pressable>
 
         <Styled.TitleContainer>{title}</Styled.TitleContainer>
 

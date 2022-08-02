@@ -1,10 +1,12 @@
 import React from "react";
+import { View } from "react-native";
+
+import { useTheme } from "native-base";
 
 import { Text } from "../../components/Text";
 import { CurrencyNumber } from "../../components/CurrencyNumber";
 
 import * as Styled from "./styles";
-import { View } from "react-native";
 
 interface CardProps {
   cardContent: {
@@ -19,18 +21,29 @@ interface CardProps {
 }
 
 export const CardValues: React.FC<CardProps> = ({ cardContent, onPress }) => {
+  const { colors } = useTheme();
+
   return (
     <Styled.Card backgroundColor={cardContent.type} onPress={onPress}>
       <Styled.Content>
-        <View>
+        <Styled.LeftContent>
           <Styled.TitleStyled numberOfLines={1} ellipsizeMode="tail">
             {cardContent.title}
           </Styled.TitleStyled>
-          <Text>{cardContent.type}</Text>
+          <Text
+            textTransform="capitalize"
+            color={
+              cardContent.type === "entrada"
+                ? colors.green[500]
+                : colors.red[500]
+            }
+          >
+            {cardContent.type}
+          </Text>
           <Text numberOfLines={1} ellipsizeMode="tail">
             {cardContent.description}
           </Text>
-        </View>
+        </Styled.LeftContent>
 
         <View>
           <Styled.Value backgroundColor={cardContent.type}>

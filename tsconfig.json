@@ -6,23 +6,16 @@
       "react-native",
       "styled-components-react-native"
     ],
-    "lib": [
-      "es2019"
-    ],
-    "allowJs": true,
-    "jsx": "react-native",
-    "noEmit": true,
     "isolatedModules": true,
     "strict": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "skipLibCheck": false
+    "skipLibCheck": false,
   },
   "include": [
-    "./src/*"
+    "./src/*",
+    "src/routes/routes.tsx"
   ],
   "exclude": [
     "node_modules",
