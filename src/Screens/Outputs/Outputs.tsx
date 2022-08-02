@@ -39,8 +39,8 @@ export const Outputs: React.FC = () => {
     title: "",
     value: "",
     description: "",
-    type: "entrada",
   });
+  const [type, setType] = useState("entrada");
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -70,7 +70,7 @@ export const Outputs: React.FC = () => {
         value: formatCurrencyToUs(fields.value),
         title: fields.title,
         description: fields.description,
-        type: fields.type,
+        type,
         createdAt: new Date(),
       };
 
@@ -120,7 +120,6 @@ export const Outputs: React.FC = () => {
             />
 
             <Input
-              placeholder={"Descrição"}
               value={fields.description}
               onChangeText={(text) =>
                 setFields({ ...fields, description: text })
@@ -129,11 +128,12 @@ export const Outputs: React.FC = () => {
               multiline
               h={24}
               textAlignVertical="top"
+              placeholder="Descrição"
             />
 
             <RadioGroup
-              checked={fields.type}
-              setChecked={(state) => setFields({ ...fields, type: state })}
+              checked={type}
+              setChecked={setType}
               marginBottom="10px"
               marginTop="10px"
             />

@@ -41,18 +41,18 @@ export const Input: React.FC<InputProps> = ({
       marginTop={marginTop}
     >
       <NativeBaseInput
-        bg="gray.700"
+        bg="gray.100"
         h={14}
         size="md"
         borderWidth={0}
         fontSize="md"
         fontFamily="body"
-        color="white"
+        color="gray.800"
         placeholderTextColor="gray.300"
         _focus={{
           borderWidth: 1,
-          borderColor: "green.500",
-          bg: "gray.700",
+          borderColor: "primary.700",
+          bg: "gray.100",
         }}
         onChangeText={onChangeText}
         value={value}

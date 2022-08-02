@@ -26,12 +26,12 @@ export const parsedCardsItems = (items: OutputsProps[]) => {
     {
       id: 2,
       title: "Entradas",
-      value: saidasValues.toFixed(2),
+      value: entradaValues.toFixed(2),
     },
     {
       id: 3,
       title: "Saídas",
-      value: entradaValues.toFixed(2),
+      value: saidasValues.toFixed(2),
     },
   ];
 

@@ -28,10 +28,11 @@ export const Filter: React.FC<Filter> = ({
       variant="outline"
       borderWidth={isActive ? 1 : 0}
       borderColor={colorType}
-      bgColor="dark.200"
+      bgColor="dark.100"
       flex={1}
       size="sm"
       onPress={onPress}
+      height={10}
     >
       <Text
         color={isActive ? colorType : colors.gray[200]}
