@@ -38,5 +38,7 @@ export const useGetAllMoney = () => {
     }, [])
   );
 
-  return { loading, data, error };
+  const refetch = getAllMoney;
+
+  return { loading, data, error, refetch };
 };

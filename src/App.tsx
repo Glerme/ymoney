@@ -2,7 +2,8 @@ import "react-native-gesture-handler";
 
 import React from "react";
 
-import { NativeBaseProvider, StatusBar } from "native-base";
+import { NativeBaseProvider } from "native-base";
+import { StatusBar } from "expo-status-bar";
 import { Loading } from "./components/Loading";
 
 import { THEME } from "./styles/theme";
@@ -20,11 +21,7 @@ const App = () => {
 
   return (
     <NativeBaseProvider theme={THEME}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
+      <StatusBar style="light" translucent backgroundColor="#191641" />
 
       {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
